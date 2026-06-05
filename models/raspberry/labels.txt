@@ -1,0 +1,6 @@
+class_names = [
+    "capacitor",
+    "diode",
+    "resistor",
+    "transistor"
+]

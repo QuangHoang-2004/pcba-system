@@ -1,0 +1,13 @@
+conveyor:
+  capture_delay_ms: 300
+  mode: sensor_trigger
+  reject_delay_ms: 800
+  reject_duration_ms: 200
+  stop_time_ms: 500
+gpio:
+  buzzer_pin: 25
+  conveyor_relay_pin: 27
+  ng_light_pin: 24
+  ok_light_pin: 23
+  reject_pin: 22
+  sensor_pin: 17
