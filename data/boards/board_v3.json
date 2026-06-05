@@ -1,0 +1,22 @@
+{
+    "board_id": "board_v3",
+    "board_name": "Mạch Loa 12V",
+    "components": [
+        {
+            "name": "capacitor",
+            "required_count": 5
+        },
+        {
+            "name": "diode",
+            "required_count": 2
+        },
+        {
+            "name": "resistor",
+            "required_count": 7
+        },
+        {
+            "name": "transistor",
+            "required_count": 5
+        }
+    ]
+}

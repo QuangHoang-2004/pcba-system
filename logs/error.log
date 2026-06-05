@@ -1,0 +1,52 @@
+[2026-05-20 15:42:41] [CRITICAL] [root] Unhandled exception
+Traceback (most recent call last):
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\main.py", line 11, in <module>
+    window = PCBADashboard()
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\src\ui\main_window.py", line 43, in __init__
+    self.setup_ui()
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\src\ui\main_window.py", line 59, in setup_ui
+    self.dashboard_page = DashboardPage()
+                          ^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\src\ui\pages\dashboard_page.py", line 139, in __init__
+    stats_layout.addWidget(self.card_good)
+    ^^^^^^^^^^^^
+NameError: name 'stats_layout' is not defined
+[2026-05-20 15:42:45] [CRITICAL] [root] Unhandled exception
+Traceback (most recent call last):
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\main.py", line 11, in <module>
+    window = PCBADashboard()
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\src\ui\main_window.py", line 43, in __init__
+    self.setup_ui()
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\src\ui\main_window.py", line 59, in setup_ui
+    self.dashboard_page = DashboardPage()
+                          ^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\src\ui\pages\dashboard_page.py", line 139, in __init__
+    stats_layout.addWidget(self.card_good)
+    ^^^^^^^^^^^^
+NameError: name 'stats_layout' is not defined
+[2026-05-21 23:10:48] [CRITICAL] [root] Unhandled exception
+Traceback (most recent call last):
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\src\hardware\camera_worker.py", line 40, in run
+    success, frame = self.camera.read_frame()
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\src\hardware\edge_camera.py", line 59, in read_frame
+    return True, self._generate_simulated_frame()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\src\hardware\edge_camera.py", line 127, in _generate_simulated_frame
+    t = time.time() - self.sim_start_time
+                      ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EdgeCamera' object has no attribute 'sim_start_time'
+[2026-05-21 23:11:11] [CRITICAL] [root] Unhandled exception
+Traceback (most recent call last):
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\src\hardware\camera_worker.py", line 40, in run
+    success, frame = self.camera.read_frame()
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\src\hardware\edge_camera.py", line 59, in read_frame
+    return True, self._generate_simulated_frame()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS-PRO\Downloads\pcba_edge_ai\src\hardware\edge_camera.py", line 127, in _generate_simulated_frame
+    t = time.time() - self.sim_start_time
+                      ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EdgeCamera' object has no attribute 'sim_start_time'
