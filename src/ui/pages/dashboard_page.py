@@ -169,7 +169,6 @@ class DashboardPage(QWidget):
         # Initialize and start Camera Worker Thread
         self.camera_worker = CameraWorker(self)
         self.camera_worker.frame_ready.connect(self.camera_widget.update_frame)
-        self.camera_worker.fps_updated.connect(self.camera_widget.set_fps)
         self.camera_worker.start()
         
         self.camera_container = AspectRatioContainer(
