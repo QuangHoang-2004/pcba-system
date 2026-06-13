@@ -98,11 +98,11 @@ class DetectDetailDialog(QDialog):
         brd_lbl = QLabel(rec["board"])
         brd_lbl.setStyleSheet("color:#F8FAFC;font-size:15px;font-weight:800;background:transparent;border:none;")
         hl.addWidget(brd_lbl)
-        dt_lbl = QLabel(f"📅 {rec['date']}   🕐 {rec['time']}")
+        dt_lbl = QLabel(f"{rec['date']}   {rec['time']}")
         dt_lbl.setStyleSheet("color:#94A3B8;font-size:12px;background:transparent;border:none;")
         hl.addStretch(); hl.addWidget(dt_lbl)
         ok = rec["status"] == "OK"
-        badge = QLabel("✅  ĐẠT CHUẨN" if ok else "❌  CÓ LỖI")
+        badge = QLabel("ĐẠT CHUẨN" if ok else "CÓ LỖI")
         badge.setStyleSheet(
             f"background:{'rgba(22,163,74,.2)' if ok else 'rgba(220,38,38,.2)'};"
             f"color:{'#4ADE80' if ok else '#F87171'};"
@@ -161,7 +161,7 @@ class DetectDetailDialog(QDialog):
         right = QVBoxLayout(); right.setSpacing(10)
 
         # Component table
-        tc, tv = _make_card("📊  Thống kê linh kiện")
+        tc, tv = _make_card("Thống kê linh kiện")
         tbl = QTableWidget(len(rec["components"]), 3)
         tbl.setHorizontalHeaderLabels(["Linh kiện","Mẫu","Phát hiện"])
         tbl.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -187,7 +187,7 @@ class DetectDetailDialog(QDialog):
         right.addWidget(tc, stretch=3)
 
         # Defect list
-        dc, dv = _make_card("⚠️  Danh sách lỗi")
+        dc, dv = _make_card("Danh sách lỗi")
         n_def = len(rec["defects"])
         tag = QLabel(f"{n_def} lỗi" if n_def else "Không có lỗi")
         tag.setStyleSheet(
@@ -205,7 +205,7 @@ class DetectDetailDialog(QDialog):
             rw.addWidget(dot); rw.addWidget(txt)
             dv.addLayout(rw)
         if not rec["defects"]:
-            ok_l = QLabel("✅  Tất cả linh kiện đạt chuẩn")
+            ok_l = QLabel("Tất cả linh kiện đạt chuẩn")
             ok_l.setStyleSheet("color:#16A34A;font-size:13px;font-weight:600;background:transparent;border:none;")
             dv.addWidget(ok_l)
         dv.addStretch()
@@ -252,7 +252,7 @@ class HistoryPage(QWidget):
             w.setStyleSheet(_COMBO)
             return w
 
-        fl.addWidget(_lbl("📅 Từ:"))
+        fl.addWidget(_lbl("Từ:"))
         self.d_from = QDateEdit(QDate(2026, 5, 18))
         self.d_from.setCalendarPopup(True); self.d_from.setFixedHeight(32)
         self.d_from.setStyleSheet(_DATE); fl.addWidget(self.d_from)
@@ -273,12 +273,12 @@ class HistoryPage(QWidget):
         self.cbo_status = _combo(["Tất cả","OK","DEFECT"])
         fl.addWidget(self.cbo_status)
 
-        b_filter = QPushButton("🔍  Lọc"); b_filter.setStyleSheet(_BTN_BLUE); b_filter.setFixedHeight(32)
+        b_filter = QPushButton("Lọc"); b_filter.setStyleSheet(_BTN_BLUE); b_filter.setFixedHeight(32)
         fl.addWidget(b_filter)
-        b_export = QPushButton("📥  CSV"); b_export.setStyleSheet(_BTN_GRAY); b_export.setFixedHeight(32)
+        b_export = QPushButton("CSV"); b_export.setStyleSheet(_BTN_GRAY); b_export.setFixedHeight(32)
         fl.addWidget(b_export)
         fl.addStretch()
-        b_clear = QPushButton("↺  Xóa lọc"); b_clear.setStyleSheet(_BTN_RED); b_clear.setFixedHeight(32)
+        b_clear = QPushButton("Xóa lọc"); b_clear.setStyleSheet(_BTN_RED); b_clear.setFixedHeight(32)
         fl.addWidget(b_clear)
         root.addWidget(fb)
 
@@ -301,7 +301,7 @@ class HistoryPage(QWidget):
         body.addLayout(self.left_layout, stretch=3)
 
         # ── Right column: log table ────────────────────────────────────────
-        tc, self.tv = _make_card("📋  Nhật ký phát hiện")
+        tc, self.tv = _make_card("Nhật ký phát hiện")
         self.tbl = QTableWidget()
         
         hdrs = ["Ngày","Giờ","Loại board","Tổng","Phát hiện","Lỗi","Trạng thái",""]
@@ -430,7 +430,7 @@ class HistoryPage(QWidget):
 
     def _render_chart(self):
         clear_layout(self.chart_layout)
-        bc, bv = _make_card("📊  Tỷ lệ đạt chuẩn")
+        bc, bv = _make_card("Tỷ lệ đạt chuẩn")
         
         # Load boards dynamically
         self.config_manager.load()

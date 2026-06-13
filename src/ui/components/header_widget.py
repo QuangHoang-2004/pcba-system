@@ -64,11 +64,8 @@ class HeaderWidget(QFrame):
         title.setFont(font)
         title.setStyleSheet("color: #0F172A; background: transparent;")
         
-        subtitle = QLabel("YOLOv8 Edge AI • TensorRT Accelerated")
-        subtitle.setStyleSheet("color: #64748B; font-size: 13px; font-weight: 500; background: transparent;")
-        
+                
         title_layout.addWidget(title)
-        title_layout.addWidget(subtitle)
 
         # Status Badge (Internet Status)
         self.status = QLabel("● CHECKING...")

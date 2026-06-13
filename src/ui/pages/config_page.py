@@ -101,8 +101,8 @@ class SystemConfigPage(QWidget):
         self.sidebar.setStyleSheet(STYLE_SIDEBAR)
         apply_shadow(self.sidebar, blur_radius=12, y_offset=4, alpha=15)
         self.sidebar.addItems([
-            "🖥️ Profile Board", 
-            "📦 Quản lý Board mạch"
+            "Profile Board", 
+            "Quản lý Board mạch"
         ])
         self.sidebar.currentRowChanged.connect(self.stack_change_page)
         root.addWidget(self.sidebar)
@@ -127,7 +127,7 @@ class SystemConfigPage(QWidget):
         btn_reload.setStyleSheet(STYLE_BTN_SECONDARY)
         btn_reload.clicked.connect(self.load_config_from_json)
         
-        btn_save = QPushButton("💾 Lưu cấu hình")
+        btn_save = QPushButton("Lưu cấu hình")
         btn_save.setStyleSheet(STYLE_BTN_PRIMARY)
         btn_save.clicked.connect(self.save_config_to_json)
         
@@ -167,7 +167,7 @@ class SystemConfigPage(QWidget):
 
     # --- PAGES ---
     def _create_active_board_page(self):
-        card, lay = self._create_scroll_card("🖥️ Chọn Mạch Chạy Dây Chuyền")
+        card, lay = self._create_scroll_card("Chọn Mạch Chạy Dây Chuyền")
         
         lbl_info = QLabel("Chọn loại mạch (Profile) hệ thống sẽ sử dụng để phát hiện và kiểm tra linh kiện.")
         lbl_info.setStyleSheet("color: #64748B; font-size: 13px; margin-bottom: 10px;")
@@ -189,7 +189,7 @@ class SystemConfigPage(QWidget):
 
 
     def _create_board_management_page(self):
-        card, lay = self._create_scroll_card("📦 Quản lý Board mạch & Linh kiện")
+        card, lay = self._create_scroll_card("Quản lý Board mạch & Linh kiện")
         
         # Select board to edit
         sel_row = QHBoxLayout()

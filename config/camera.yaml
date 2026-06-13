@@ -1,5 +1,5 @@
 camera:
-  device_id: 0
+  device_id: 1
   flip: none
   height: 480
   rotate: 0
