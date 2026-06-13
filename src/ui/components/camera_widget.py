@@ -26,17 +26,6 @@ class CameraWidget(QFrame):
         # Top Info Bar
         top_info_layout = QHBoxLayout()
         
-        self.fps_label = QLabel("FPS: --")
-        self.fps_label.setStyleSheet("""
-            color: #4ADE80;
-            background-color: rgba(74, 222, 128, 0.1);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-family: monospace;
-            font-size: 12px;
-        """)
-        
         self.model_label = QLabel("YOLO: READY")
         self.model_label.setStyleSheet("""
             color: #38BDF8;
@@ -47,7 +36,6 @@ class CameraWidget(QFrame):
             font-size: 12px;
         """)
 
-        top_info_layout.addWidget(self.fps_label)
         top_info_layout.addStretch()
         top_info_layout.addWidget(self.model_label)
 
