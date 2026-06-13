@@ -139,7 +139,7 @@ class HeaderWidget(QFrame):
 
     def set_esp_connected(self, connected: bool, port_name: str = ""):
         if connected:
-            self.esp_status.setText(f"🔌 ESP32: {port_name}")
+            self.esp_status.setText(f"ESP32: {port_name}")
             self.esp_status.setStyleSheet("""
                 QLabel {
                     background-color: rgba(34, 197, 94, 0.15);
@@ -152,7 +152,7 @@ class HeaderWidget(QFrame):
                 }
             """)
         else:
-            self.esp_status.setText("🔌 ESP32: DISCONNECTED")
+            self.esp_status.setText("ESP32: DISCONNECTED")
             self.esp_status.setStyleSheet("""
                 QLabel {
                     background-color: rgba(239, 68, 68, 0.1);
@@ -205,10 +205,10 @@ class TabBarWidget(QFrame):
         layout.setSpacing(12)
 
         tab_labels = [
-            "📊 Bảng điều khiển",
-            "⚙️ Cấu hình",
-            "🕘 Lịch sử",
-            "🛠 Cài đặt",
+            "Bảng điều khiển",
+            "Cấu hình",
+            "Lịch sử",
+            "Cài đặt",
         ]
 
         for idx, text in enumerate(tab_labels):
