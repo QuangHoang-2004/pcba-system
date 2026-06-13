@@ -62,9 +62,6 @@ class CameraWidget(QFrame):
             self.camera_overlay.hide()
         self.update()
 
-    def set_fps(self, fps_text: str):
-        self.fps_label.setText(fps_text)
-
     def paintEvent(self, event):
         # 1. Draw parent style sheet elements (background, border, rounded corners)
         super().paintEvent(event)
