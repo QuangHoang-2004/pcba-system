@@ -17,7 +17,7 @@ class SerialWorker(QThread):
         if sys.platform.startswith("win"):
             self.default_port = "COM8"
         else:
-            self.default_port = "/dev/ttyUSB0"
+            self.default_port = "/dev/serial0"
 
     def run(self):
         self.running = True
@@ -25,7 +25,7 @@ class SerialWorker(QThread):
         
         # 1. Try default port
         try:
-            self.ser = serial.Serial(self.default_port, self.baudrate, timeout=0.5)
+            self.ser = serial.Serial(self.default_port, self.baudrate, timeout=1)
             time.sleep(1) # Let the connection settle
             self.connection_status.emit(True, self.default_port)
             print(f"[SerialWorker] Connected to default port: {self.default_port}")
@@ -35,12 +35,12 @@ class SerialWorker(QThread):
             if sys.platform.startswith("win"):
                 fallback_ports = [f"COM{i}" for i in range(1, 12) if f"COM{i}" != self.default_port]
             else:
-                fallback_ports = ["/dev/ttyACM0", "/dev/ttyUSB1", "/dev/ttyUSB2", "/dev/ttyUSB0"]
+                fallback_ports = ["/dev/ttyUSB0", "/dev/ttyACM0", "/dev/ttyUSB1", "/dev/ttyUSB2"]
             
             connected = False
             for port in fallback_ports:
                 try:
-                    self.ser = serial.Serial(port, self.baudrate, timeout=0.5)
+                    self.ser = serial.Serial(port, self.baudrate, timeout=1)
                     time.sleep(1)
                     self.connection_status.emit(True, port)
                     print(f"[SerialWorker] Connected to fallback port: {port}")

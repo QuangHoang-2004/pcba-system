@@ -180,6 +180,7 @@ class DashboardPage(QWidget):
         self.control_panel = ControlPanel()
         self.control_panel.btn_start.clicked.connect(self._start_detection)
         self.control_panel.btn_stop.clicked.connect(self._stop_detection)
+        self.control_panel.btn_reset.clicked.connect(self._reset_detection)
         left_layout.addWidget(self.control_panel, stretch=1)
 
         # --- RIGHT PANEL ---
@@ -286,6 +287,13 @@ class DashboardPage(QWidget):
             print("[DashboardPage] Sent STOP to ESP32.")
         
         self.sim_timer.stop()
+
+    def _reset_detection(self):
+        if self.serial_connected and self.serial_worker:
+            self.serial_worker.send_cmd("RESET_QUEUE\n")
+            print("[DashboardPage] Sent RESET_QUEUE to ESP32.")
+        else:
+            print("[DashboardPage] ESP32 not connected. Cannot send RESET_QUEUE.")
 
     def _simulate_detection(self):
         self._execute_detection()
