@@ -90,4 +90,3 @@ python main.py
 1. **Dashboard Thời Gian Thực:** Hiển thị luồng video từ camera, đếm số lượng linh kiện, số bo mạch lỗi/đạt (Pass/Fail).
 2. **Quản Trị Lịch Sử:** Tra cứu lịch sử kiểm tra, xem chi tiết ảnh chụp lỗi của từng bo mạch.
 3. **Quản lý Profile Đa Dạng:** Giao diện cho phép tạo và quản lý nhiều cấu hình mạch (Boards) khác nhau, lưu độc lập trong `data/boards/`.
-4. **Kiến trúc Engine Linh Hoạt:** Factory Pattern cho phép AI Engine tự động nạp thư viện `ONNX` hoặc `TensorRT` tùy theo cấu hình `runtime` mà không gây lỗi thiếu thư viện trên các thiết bị chéo.
