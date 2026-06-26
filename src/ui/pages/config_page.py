@@ -200,9 +200,12 @@ class SystemConfigPage(QWidget):
         
         btn_add = QPushButton("+ Thêm"); btn_add.setStyleSheet(STYLE_BTN_SECONDARY)
         btn_add.clicked.connect(self._add_board)
+        btn_add_bom = QPushButton("+ Nhập từ BOM"); btn_add_bom.setStyleSheet(STYLE_BTN_SECONDARY)
+        btn_add_bom.clicked.connect(self._add_board_from_bom)
         btn_del = QPushButton("- Xóa"); btn_del.setStyleSheet(STYLE_BTN_DANGER)
         btn_del.clicked.connect(self._del_board)
         sel_row.addWidget(btn_add)
+        sel_row.addWidget(btn_add_bom)
         sel_row.addWidget(btn_del)
         sel_row.addStretch()
         lay.addLayout(sel_row)
@@ -259,6 +262,111 @@ class SystemConfigPage(QWidget):
             })
             self._refresh_combos()
             self.ui_edit_board_sel.setCurrentText(new_id)
+
+    def _add_board_from_bom(self):
+        file_path, _ = QFileDialog.getOpenFileName(
+            self, "Chọn file BOM Excel", "", "Excel Files (*.xlsx *.xls)"
+        )
+        if not file_path:
+            return
+            
+        new_id, ok = QInputDialog.getText(self, "Nhập ID Board", "Nhập ID (Mã board, vd: board_v3):")
+        if not ok or not new_id.strip():
+            return
+            
+        new_id = new_id.strip()
+        if any(b.get("board_id") == new_id for b in self.boards):
+            QMessageBox.warning(self, "Lỗi", "Board ID đã tồn tại!")
+            return
+            
+        new_name, ok = QInputDialog.getText(self, "Nhập Tên Board", "Nhập tên mạch hiển thị (vd: Mạch Loa 12V):")
+        if not ok or not new_name.strip():
+            new_name = "New Board"
+        else:
+            new_name = new_name.strip()
+            
+        try:
+            import pandas as pd
+            import re
+            
+            df = pd.read_excel(file_path)
+            
+            designator_col = None
+            for col in df.columns:
+                if str(col).strip().lower() == "designator":
+                    designator_col = col
+                    break
+                    
+            if designator_col is None:
+                raise ValueError("Không tìm thấy cột 'Designator' trong file BOM.")
+                
+            counts = {
+                "R": 0,
+                "C": 0,
+                "D": 0,
+                "Q": 0
+            }
+            
+            for designators in df[designator_col].dropna():
+                refs = str(designators).replace(" ", "").replace(";", ",").split(",")
+                for ref in refs:
+                    if not ref:
+                        continue
+                    match = re.match(r"([A-Za-z]+)", ref)
+                    if match:
+                        prefix = match.group(1).upper()
+                        if prefix in counts:
+                            counts[prefix] += 1
+                            
+            component_mapping = {
+                "R": "resistor",
+                "C": "capacitor",
+                "D": "diode",
+                "Q": "transistor"
+            }
+            
+            components = []
+            for prefix, name in component_mapping.items():
+                count = counts[prefix]
+                if count > 0:
+                    components.append({
+                        "name": name,
+                        "required_count": count
+                    })
+                    
+            self._save_board_edit_to_memory()
+            self.boards.append({
+                "board_id": new_id,
+                "board_name": new_name,
+                "components": components
+            })
+            self._refresh_combos()
+            self.ui_edit_board_sel.setCurrentText(new_id)
+            
+            QMessageBox.information(
+                self,
+                "Thành công",
+                f"Đã thêm board '{new_id}' từ BOM file thành công!\n\n"
+                f"Linh kiện tìm thấy:\n"
+                f"- Resistor (R): {counts['R']}\n"
+                f"- Capacitor (C): {counts['C']}\n"
+                f"- Diode (D): {counts['D']}\n"
+                f"- Transistor (Q): {counts['Q']}"
+            )
+            
+        except ImportError:
+            QMessageBox.critical(
+                self,
+                "Lỗi Thư Viện",
+                "Vui lòng cài đặt thư viện 'pandas' và 'openpyxl' để sử dụng tính năng này.\n"
+                "Chạy lệnh: pip install pandas openpyxl"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Lỗi đọc file BOM",
+                f"Không thể đọc file BOM:\n{str(e)}"
+            )
 
     def _del_board(self):
         if len(self.boards) <= 1:
